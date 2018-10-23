@@ -1,3 +1,14 @@
+[![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/firewut/go-json-map/master/LICENSE)
+
+# About
+
+This is a GUI for a Pipelined Data Processing. 
+
+You can build own Pipe and Send Any Data to it.
+
+![Pipeline](screenshots/pipeline.PNG "Markdown from HTML Page")
+
+
 # DataTransform
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.4.
