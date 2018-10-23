@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FileSelectDirective } from 'ng2-file-upload';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -94,7 +95,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-
 import { APIService } from './services/api/api.service';
 import { ProcessorsComponent } from './projects/processors.component';
 import { ProcessorComponent } from './projects/processor.component';
@@ -105,6 +105,7 @@ import { PipelineComponent } from './projects/pipeline.component';
 @NgModule({
   declarations: [
     AppComponent,
+    FileSelectDirective,
     ProcessorsComponent,
     ProcessorComponent,
     ProjectsComponent,

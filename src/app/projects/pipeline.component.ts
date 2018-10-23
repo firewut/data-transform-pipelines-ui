@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Pipe } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
 import { Subscription } from 'rxjs';
 import { DragulaService } from 'ng2-dragula';
+import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+
 
 import { APIService, PaginatedResponse } from '../services/api/api.service';
 import { Pipeline } from './classes/pipeline';
@@ -20,6 +21,8 @@ export class PipelineComponent implements OnInit, OnDestroy {
     pipeline: Pipeline;
     processors: Processor[];
 
+    public uploader: FileUploader;
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -30,9 +33,18 @@ export class PipelineComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.getPipeline(
-            this.route.snapshot.paramMap.get('id')
-        );
+        const pipeline_id = this.route.snapshot.paramMap.get('id');
+        this.getPipeline(pipeline_id);
+
+        this.uploader = new FileUploader({
+            url: this.api_service.getPipelineProcesingURL(pipeline_id),
+            itemAlias: 'File'
+        });
+        this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+        this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+            console.log('ImageUpload:uploaded:', item, status, response);
+            alert('File uploaded successfully');
+        };
     }
 
     ngOnDestroy() {
