@@ -1,0 +1,42 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/dragula/dist/dragula.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+html, body { 
+    height: 100%; 
+}
+body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+table {
+    width: 100%;
+}
+
+.container {
+    padding: 30px;
+}
+
+.mat-row:hover {
+    background-color: #fff8dc;
+}
+.invalid_pipe_processor {
+    background-color: yellow;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.mat-form-field-underline {
+    display: none;
+}
+
+.va-equal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    flex-flow: row;
+}

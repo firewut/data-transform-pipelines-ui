@@ -1,0 +1,102 @@
+<mat-card *ngIf="pipeline">
+    <mat-card-title>
+        <mat-form-field class="full-width" [floatLabel]="'never'">
+            <textarea matInput cdkTextareaAutosize placeholder="Title" [(ngModel)]="pipeline.title"></textarea>
+        </mat-form-field>
+    </mat-card-title>
+    <mat-card-content *ngIf="pipeline.description">
+        <mat-form-field class="full-width" [floatLabel]="'never'">
+            <input matInput placeholder="Description" [(ngModel)]="pipeline.description">
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-content>
+        <mat-card>
+            <mat-card-subtitle>Processors</mat-card-subtitle>
+            <mat-card-content>
+                <mat-accordion multi="true">
+                    <div dragula="{{ pipeline.id }}" [(dragulaModel)]="pipeline.processors" (dragulaModelChange)="pipelineChanged(pipeline)">
+                        <mat-expansion-panel *ngFor="let processor of pipeline.processors"
+                            [class.invalid_pipe_processor]="processor.errors.length > 0">
+                            <div *ngIf="processor.errors">
+                                <mat-error *ngFor="let error of processor.errors">{{ error }}</mat-error>
+                            </div>
+
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>{{ processor.id }}</mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-action-row>
+                                <button mat-button (click)="pipelineAction('remove_processor', pipeline, undefined, processor)">
+                                    <mat-icon>delete_forever</mat-icon>
+                                    Delete
+                                </button>
+                            </mat-action-row>
+
+                            <mat-tab-group>
+                                <!-- INPUT/OUTPUT SCHEMAS -->
+                                <mat-tab label="Input Schema" *ngIf="processor.template.schema.in">
+                                    <p>
+                                        <mat-form-field>
+                                            <textarea matInput cdkTextareaAutosize placeholder="Input Schema" [value]="processor.template.schema.in | json"
+                                                readonly></textarea>
+                                        </mat-form-field>
+                                    </p>
+                                </mat-tab>
+                                <mat-tab label="Output Schema" *ngIf="processor.template.schema.out">
+                                    <p>
+                                        <mat-form-field>
+                                            <textarea matInput cdkTextareaAutosize placeholder="Output Schema" [value]="processor.template.schema.out | json"
+                                                readonly></textarea>
+                                        </mat-form-field>
+                                    </p>
+                                </mat-tab>
+                                <!-- INPUT/OUTPUT CONFIG SCHEMAS -->
+                                <mat-tab label="Input Config" *ngIf="processor.template.schema.in_config">
+                                    <div class="va-equal">
+                                        <mat-form-field class="half-width">
+                                            <textarea matInput cdkTextareaAutosize placeholder="Input Config Schema"
+                                                [value]="processor.template.schema.in_config | json" readonly></textarea>
+                                        </mat-form-field>
+                                        <mat-form-field class="half-width">
+                                            <textarea matInput cdkTextareaAutosize placeholder="Input Config"
+                                                [(ngModel)]="processor.in_config" [value]="processor.in_config | json"></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label="Output Config" *ngIf="processor.template.schema.out_config">
+                                    <p>
+                                        <mat-form-field>
+                                            <textarea matInput cdkTextareaAutosize placeholder="Output Config Schema"
+                                                [value]="processor.template.schema.out_config | json" [(ngModel)]="processor.template.schema.in_config"
+                                                readonly></textarea>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <textarea matInput cdkTextareaAutosize placeholder="Output Config"
+                                                [(ngModel)]="processor.out_config" [value]="processor.out_config | json"></textarea>
+                                        </mat-form-field>
+                                        <p></p>
+                                </mat-tab>
+                            </mat-tab-group>
+
+                        </mat-expansion-panel>
+                    </div>
+                </mat-accordion>
+            </mat-card-content>
+            <mat-card-subtitle>Pipeline Actions</mat-card-subtitle>
+
+            <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
+                <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
+            </ng-select>
+            <button mat-button [disabled]="!pipeline.should_be_saved" (click)="pipelineAction('save', pipeline)">
+                <mat-icon>save</mat-icon>
+                Save
+            </button>
+            <button mat-button (click)="pipelineAction('delete', pipeline)">
+                <mat-icon>delete_forever</mat-icon>
+                Delete
+            </button>
+
+        </mat-card>
+        <mat-progress-bar *ngIf="pipeline.is_processing" mode="indeterminate"></mat-progress-bar>
+    </mat-card-content>
+</mat-card>

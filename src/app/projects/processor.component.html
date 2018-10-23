@@ -1,0 +1,13 @@
+<mat-card *ngIf="processor">
+    <mat-card-title>{{ processor.name }}</mat-card-title>
+    <mat-card-content>
+        {{ processor.description }}
+    </mat-card-content>
+
+    <mat-card-content>
+        <div *ngIf="processor.schema">
+            Schema:
+            <pre>{{ processor.schema | json}}</pre>
+        </div>
+    </mat-card-content>
+</mat-card>
