@@ -109,4 +109,13 @@ export class PipelineProcessor {
 
         return is_valid;
     }
+
+    // TODO: DRY Refactor
+    public set_in_schema(value?: any) {
+        this.in_config = JSON.parse(value);
+    }
+
+    public set_out_schema(value?: any) {
+        this.in_config = JSON.parse(value);
+    }
 }
