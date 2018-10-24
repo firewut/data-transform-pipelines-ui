@@ -37,6 +37,10 @@ export class APIService {
 
   constructor(private http: HttpClient) { }
 
+  public getPipelineProcesingURL(pipeline_id: string): string {
+    return `${API_URL}/pipelines/${pipeline_id}/process/`
+  }
+
   public getProcessor(id: string): Observable<Processor> {
     return this.http.get<Processor>(
       `${API_URL}/processors/${id}/`,

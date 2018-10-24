@@ -1,13 +1,9 @@
 <mat-card *ngIf="pipeline">
     <mat-card-title>
-        <mat-form-field class="full-width" [floatLabel]="'never'">
-            <textarea matInput cdkTextareaAutosize placeholder="Title" [(ngModel)]="pipeline.title"></textarea>
-        </mat-form-field>
+        <textarea matInput class="full-width" cdkTextareaAutosize placeholder="Title" [(ngModel)]="pipeline.title"></textarea>
     </mat-card-title>
     <mat-card-content *ngIf="pipeline.description">
-        <mat-form-field class="full-width" [floatLabel]="'never'">
-            <input matInput placeholder="Description" [(ngModel)]="pipeline.description">
-        </mat-form-field>
+        <textarea matInput class="full-width" cdkTextareaAutosize placeholder="Description" [(ngModel)]="pipeline.description"></textarea>
     </mat-card-content>
 
     <mat-card-content>
@@ -83,17 +79,50 @@
         </mat-card-content>
         <mat-card-subtitle>Pipeline Actions</mat-card-subtitle>
 
-        <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
-            <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
-        </ng-select>
-        <button mat-button [disabled]="!pipeline.should_be_saved" (click)="pipelineAction('save', pipeline)">
-            <mat-icon>save</mat-icon>
-            Save
-        </button>
-        <button mat-button (click)="pipelineAction('delete', pipeline)">
-            <mat-icon>delete_forever</mat-icon>
-            Delete
-        </button>
+        <div>
+            <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
+                <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
+            </ng-select>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Try Pipeline</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-tab-group>
+                        <mat-tab label="Send Text">
+                            <p>
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <textarea matInput cdkTextareaAutosize placeholder="Enter Value"></textarea>
+                                </mat-form-field>
+                                <button mat-button>
+                                    <mat-icon>send</mat-icon>
+                                    Send
+                                </button>
+                            </p>
+                        </mat-tab>
+                        <mat-tab label="Upload File">
+                            <p>
+                                <input type="file" name="file" class="full-width" ng2FileSelect [uploader]="uploader" />
+                                <button mat-button (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                                    <mat-icon>send</mat-icon>
+                                    Upload
+                                </button>
+                            </p>
+                        </mat-tab>
+                    </mat-tab-group>
+
+                </mat-card-content>
+            </mat-card>
+
+            <button mat-button [disabled]="!pipeline.should_be_saved" (click)="pipelineAction('save', pipeline)">
+                <mat-icon>save</mat-icon>
+                Save
+            </button>
+            <button mat-button (click)="pipelineAction('delete', pipeline)">
+                <mat-icon>delete_forever</mat-icon>
+                Delete
+            </button>
+        </div>
 
         <mat-progress-bar *ngIf="pipeline.is_processing" mode="indeterminate"></mat-progress-bar>
     </mat-card-content>
