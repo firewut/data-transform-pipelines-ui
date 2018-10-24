@@ -39,7 +39,7 @@ export class Pipeline {
         // Must ensure that Siblings processor's In and Out are compatible
         if (this.processors) {
             // Reset errors
-            for (let processor of this.processors) {
+            for (const processor of this.processors) {
                 processor.errors = [];
             }
 
@@ -57,11 +57,16 @@ export class Pipeline {
             }
 
             // Check Processor Config
-            for (let processor of this.processors) {
+            for (const processor of this.processors) {
                 if (processor.in_config_is_valid() === false) {
                     processor.errors.push(
                         'Input Config is invalid'
-                    )
+                    );
+                }
+                if (processor.out_config_is_valid() === false) {
+                    processor.errors.push(
+                        'Output Config is invalid'
+                    );
                 }
             }
         }
