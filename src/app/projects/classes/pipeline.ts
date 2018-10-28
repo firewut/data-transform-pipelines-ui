@@ -13,6 +13,7 @@ export class Pipeline {
     disabled: boolean;
     should_be_saved = false;
     is_processing = false;
+    starts_with_file = false;
 
     constructor(json: any) {
         this.id = json.id;
@@ -30,6 +31,14 @@ export class Pipeline {
 
         // Execute a check
         this.checkProcessors();
+    }
+
+    private _check_starts_with_file(): boolean {
+        if (this.processors.length <= 0) {
+            return false;
+        }
+        const in_types = new Set(this.processors[0].template.schema.in.type);
+        return in_types.has('file');
     }
 
     public checkProcessors(): PipelineProcessor[] {
@@ -70,6 +79,8 @@ export class Pipeline {
                 }
             }
         }
+
+        this.starts_with_file = this._check_starts_with_file();
 
         return [...misplaced_processors, ...unconfigured_processors];
     }
