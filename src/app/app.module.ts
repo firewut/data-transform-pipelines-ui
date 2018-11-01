@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { DragulaModule } from 'ng2-dragula';
+import { HighlightModule } from 'ngx-highlightjs';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -96,6 +97,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { APIService } from './services/api/api.service';
+import { AboutComponent } from './projects/about.component';
 import { ProcessorsComponent } from './projects/processors.component';
 import { ProcessorComponent } from './projects/processor.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -106,6 +108,7 @@ import { PipelineComponent } from './projects/pipeline.component';
   declarations: [
     AppComponent,
     FileSelectDirective,
+    AboutComponent,
     ProcessorsComponent,
     ProcessorComponent,
     ProjectsComponent,
@@ -113,7 +116,6 @@ import { PipelineComponent } from './projects/pipeline.component';
     PipelineComponent,
   ],
   imports: [
-    // SortablejsModule.forRoot({animation: 150}),
     DragulaModule.forRoot(),
     NgSelectModule,
     BrowserModule,
@@ -122,6 +124,9 @@ import { PipelineComponent } from './projects/pipeline.component';
     MaterialModule,
     AppRoutingModule,
     FormsModule,
+    HighlightModule.forRoot({
+      theme: 'default'
+    }),
   ],
   providers: [
     APIService,

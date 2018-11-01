@@ -1,0 +1,66 @@
+<mat-card>
+    <mat-card-title>
+        FAQ
+    </mat-card-title>
+    <mat-card-content>
+        <ol>
+            <li>
+                <div>
+                    What's this?
+                    <p>
+                        Let's say this is a <b>"Data Processing Pipelines"</b>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    What's Pipeline?
+                    <p>
+                        The Pipeline is a list of "Processors" which Transforms Data in the Way You Determined.
+                    </p>
+
+                    <p>Example:</p>
+                    <ul>
+                        <li>Upload an Image</li>
+                        <li>Resize to 200x200</li>
+                        <li>Grayscale it</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div>
+                    How do I send Data to Pipeline?
+                    <p>
+                        Let's assume that Your Pipeline has ID <b>1234</b>
+                    </p>
+                    <p>
+                        To Upload an Image we would need to execute this request
+                    </p>
+
+                    <pre>
+                        <code highlight>
+curl -X POST -F file=@/full/path/to/file.png \
+    "http://127.0.0.1:8000/api/v1/free/pipelines/1234/process/"
+                        </code>
+                    </pre>
+
+                    And receive a Result
+                    <pre>
+                        <code highlight>
+                                <![CDATA[
+{
+    "id": "e3c10ba0-8562-49d6-a132-fe6272e8a2b4",
+    "pipeline": "14f2da12-fe04-413f-bb0e-b046df6efbbe",
+    "result": null,
+    "error": null,
+    "is_finished": false,
+    "ctime": "2018-11-01T13:47:06.691713Z"
+}
+                                ]]>
+                        </code>
+                    </pre>
+                </div>
+            </li>
+        </ol>
+    </mat-card-content>
+</mat-card>
