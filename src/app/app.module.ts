@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -107,7 +107,6 @@ import { PipelineComponent } from './projects/pipeline.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FileSelectDirective,
     AboutComponent,
     ProcessorsComponent,
     ProcessorComponent,
@@ -124,6 +123,7 @@ import { PipelineComponent } from './projects/pipeline.component';
     MaterialModule,
     AppRoutingModule,
     FormsModule,
+    FileUploadModule,
     HighlightModule.forRoot({
       theme: 'default'
     }),
