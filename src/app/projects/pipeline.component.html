@@ -90,19 +90,26 @@
                 <mat-card-content>
                     <p *ngIf="!pipeline.starts_with_file">
                         <mat-form-field class="full-width" appearance="outline">
-                            <textarea matInput cdkTextareaAutosize placeholder="Enter Value"></textarea>
+                            <textarea matInput cdkTextareaAutosize placeholder="Enter Value" [(ngModel)]="data"
+                                [disabled]="!pipeline.requires_input"></textarea>
                         </mat-form-field>
-                        <button mat-button>
+                        <button mat-button (click)="pipelineAction('process', pipeline)">
                             <mat-icon>send</mat-icon>
                             Send
                         </button>
                     </p>
                     <p *ngIf="pipeline.starts_with_file">
-                        <input type="file" name="file" class="full-width" ng2FileSelect [uploader]="uploader" />
+                        <input type="file" name="file" class="full-width" ng2FileSelect [uploader]="uploader"
+                            [(ngModel)]="data_file" />
                         <button mat-button (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
                             <mat-icon>send</mat-icon>
                             Upload
                         </button>
+                    </p>
+                    <p *ngIf="pipeline.result">
+                        <textarea matInput cdkTextareaAutosize placeholder="Result" [value]="pipeline.result | json"
+                            readonly></textarea>
+                        <img mat-card-image [src]="pipeline.result.get_image()">
                     </p>
                 </mat-card-content>
             </mat-card>

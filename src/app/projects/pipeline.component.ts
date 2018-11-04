@@ -7,8 +7,9 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
 
 
 import { APIService, PaginatedResponse } from '../services/api/api.service';
-import { Pipeline } from './classes/pipeline';
+import { Pipeline, PipelineResult } from './classes/pipeline';
 import { Processor, PipelineProcessor } from './classes/processor';
+import { $ } from 'protractor';
 
 @Component({
     selector: 'app-pipeline',
@@ -22,6 +23,11 @@ export class PipelineComponent implements OnInit, OnDestroy {
     processors: Processor[];
 
     public uploader: FileUploader;
+    public data: any;
+    public pipeline_result: PipelineResult;
+
+    // TODO: Replace this
+    public data_file: any;
 
     constructor(
         private router: Router,
@@ -37,13 +43,35 @@ export class PipelineComponent implements OnInit, OnDestroy {
         this.getPipeline(pipeline_id);
 
         this.uploader = new FileUploader({
-            url: this.api_service.getPipelineProcesingURL(pipeline_id),
+            url: this.api_service.getPipelineProcesingURL(
+                pipeline_id
+            ),
             itemAlias: 'File'
         });
-        this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+        this.uploader.onBuildItemForm = (item, form) => {
+            form.append(
+                'processors',
+                JSON.stringify(this.pipeline.processors)
+            );
+        };
+        this.uploader.onAfterAddingFile = (file) => {
+            file.withCredentials = false;
+        };
         this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-            console.log('ImageUpload:uploaded:', item, status, response);
-            alert('File uploaded successfully');
+            if (status === 202) {
+                this.data_file = null;
+                if ( this.pipeline.finishes_with_file ) {
+                    this.pipeline.result = new PipelineResult(
+                        JSON.parse(response),
+                        this.pipeline,
+                    );
+                    this.pipeline.start_refreshing_result(
+                        (_result: any) => {
+                            // pass
+                        }
+                    );
+                }
+            }
         };
     }
 
@@ -56,7 +84,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
         this.api_service.getPipeline(id)
             .subscribe(
                 (pipeline: Pipeline) => {
-                    this.pipeline = new Pipeline(pipeline);
+                    this.pipeline = new Pipeline(pipeline, this.api_service);
                     this.pipelineChanged(this.pipeline);
 
                     // Request a list of processors
@@ -95,6 +123,12 @@ export class PipelineComponent implements OnInit, OnDestroy {
                             }
                         );
                 }
+                break;
+            case 'process':
+                pipeline.process_with_refresh({
+                    'data': this.data,
+                    'processors': pipeline.processors,
+                });
                 break;
             case 'delete':
                 alert("Not Yet Implemented");

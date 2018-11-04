@@ -2,19 +2,18 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
-import { Headers } from '@angular/http';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { Project } from '../../projects/classes/project';
 import { Processor } from '../../projects/classes/processor';
-import { Pipeline } from '../../projects/classes/pipeline';
-import { HttpParamsOptions } from '@angular/common/http/src/params';
+import { Pipeline, PipelineResult } from '../../projects/classes/pipeline';
 
 const API_URL = environment.apiUrl;
+const API_MEDIA_URL = environment.apiMediaUrl;
 
 const httpOptions = {
-  headers: new Headers({
+  headers: new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': 'Token ',
   }),
@@ -35,10 +34,45 @@ export class PaginatedResponse {
 @Injectable()
 export class APIService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  public getPipelineResultFileURL(result: any): string {
+    let result_url = '';
+    if (result) {
+      if (result.hasOwnProperty('url')) {
+        result_url = `${API_MEDIA_URL}${result.url}`;
+      }
+    }
+    return result_url;
+  }
 
   public getPipelineProcesingURL(pipeline_id: string): string {
-    return `${API_URL}/pipelines/${pipeline_id}/process/`
+    return `${API_URL}/pipelines/${pipeline_id}/process/`;
+  }
+
+  public getPipelineResultURL(result_id: string): string {
+    return `${API_URL}/pipeline_result/${result_id}/`;
+  }
+
+  public processPipeline(pipeline: Pipeline, data: any): Observable<PipelineResult> {
+    return this.http.post<PipelineResult>(
+      this.getPipelineProcesingURL(pipeline.id),
+      data,
+      this.build_http_options()
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public refreshPipelineResult(result_id: string): Observable<PipelineResult> {
+    return this.http.get<PipelineResult>(
+      this.getPipelineResultURL(result_id),
+      this.build_http_options()
+    ).pipe(
+      catchError(this.handleError)
+    );
   }
 
   public getProcessor(id: string): Observable<Processor> {
@@ -53,6 +87,7 @@ export class APIService {
   }
 
   public putPipeline(pipeline: Pipeline): Observable<Pipeline> {
+    console.log(pipeline)
     return this.http.put<Pipeline>(
       `${API_URL}/pipelines/${pipeline.id}/`,
       pipeline,
