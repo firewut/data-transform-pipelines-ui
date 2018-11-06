@@ -1,4 +1,5 @@
-[![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/firewut/go-json-map/master/LICENSE)
+[![Build Status](https://travis-ci.com/firewut/data-transform-pipelines-ui.svg)](https://travis-ci.com/firewut/data-transform-pipelines-ui)
+[![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/firewut/data-transform-pipelines-ui/master/LICENSE)
 
 # About
 
