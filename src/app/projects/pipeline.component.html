@@ -9,7 +9,7 @@
     <mat-card-content>
         <mat-card-subtitle>Processors</mat-card-subtitle>
         <mat-card-content>
-            <mat-accordion multi="true">
+            <mat-accordion class="headers-align" multi="true">
                 <div dragula="{{ pipeline.id }}" [(dragulaModel)]="pipeline.processors" (dragulaModelChange)="pipelineChanged(pipeline)">
                     <mat-expansion-panel *ngFor="let processor of pipeline.processors" [class.invalid_pipe_processor]="processor.errors.length > 0">
                         <div *ngIf="processor.errors">
@@ -72,13 +72,15 @@
                                     <p></p>
                             </mat-tab>
                         </mat-tab-group>
-
                     </mat-expansion-panel>
+
                 </div>
             </mat-accordion>
         </mat-card-content>
-        <mat-card-subtitle>Pipeline Actions</mat-card-subtitle>
+    </mat-card-content>
 
+    <mat-card-content>
+        <mat-card-subtitle>Pipeline Actions</mat-card-subtitle>
         <div>
             <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
                 <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
@@ -123,7 +125,6 @@
                 Delete
             </button>
         </div>
-
-        <mat-progress-bar *ngIf="pipeline.is_processing" mode="indeterminate"></mat-progress-bar>
     </mat-card-content>
+    <mat-progress-bar *ngIf="pipeline.is_processing" mode="indeterminate"></mat-progress-bar>
 </mat-card>

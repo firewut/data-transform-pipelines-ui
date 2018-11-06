@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { DragulaModule } from 'ng2-dragula';
 import { HighlightModule } from 'ngx-highlightjs';
 
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';

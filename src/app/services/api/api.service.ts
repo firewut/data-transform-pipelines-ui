@@ -87,7 +87,6 @@ export class APIService {
   }
 
   public putPipeline(pipeline: Pipeline): Observable<Pipeline> {
-    console.log(pipeline)
     return this.http.put<Pipeline>(
       `${API_URL}/pipelines/${pipeline.id}/`,
       pipeline,

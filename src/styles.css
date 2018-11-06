@@ -15,13 +15,13 @@ table {
 
 .container {
     padding: 30px;
-}
+}  
 
 .mat-row:hover {
     background-color: #fff8dc;
 }
 .invalid_pipe_processor {
-    background-color: yellow;
+    background-color: rgb(255, 113, 113);
 }
 
 .full-width {
@@ -41,4 +41,14 @@ table {
     flex-wrap: wrap;
     justify-content: left;
     flex-flow: row;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
 }
