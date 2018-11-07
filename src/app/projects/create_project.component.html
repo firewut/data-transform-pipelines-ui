@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-title>
+        <mat-form-field>
+            <textarea matInput required class="full-width" cdkTextareaAutosize placeholder="Title" [(ngModel)]="title"></textarea>
+        </mat-form-field>
+    </mat-card-title>
+    <mat-card-content>
+        <textarea matInput class="full-width" cdkTextareaAutosize placeholder="Description" [(ngModel)]="description"></textarea>
+    </mat-card-content>
+    <button mat-raised-button color="primary" (click)="createProject()" [disabled]="!title">
+        Create
+    </button>
+</mat-card>

@@ -76,10 +76,12 @@ export class Pipeline {
         this.id = json.id;
         this.description = json.description;
         this.processors = [];
-        for (const json_processor of json.processors) {
-            this.processors.push(
-                new PipelineProcessor(json_processor)
-            );
+        if (json.processors) {
+            for (const json_processor of json.processors) {
+                this.processors.push(
+                    new PipelineProcessor(json_processor)
+                );
+            }
         }
         this.project = json.project;
         this.title = json.title;
@@ -187,7 +189,7 @@ export class Pipeline {
             this.processors[0].template.schema.in.type
         );
 
-        if (in_types.has('null') && ( in_types.size === 1 )) {
+        if (in_types.has('null') && (in_types.size === 1)) {
             return false;
         }
 

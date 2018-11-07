@@ -5,6 +5,11 @@
     <mat-card-content *ngIf="project.description">
         <textarea matInput class="full-width" cdkTextareaAutosize placeholder="Description" [(ngModel)]="project.description"></textarea>
     </mat-card-content>
+    <mat-card-subtitle>
+        <button mat-raised-button color="primary" (click)="createPipelineDialog()">
+            Create New
+        </button>
+    </mat-card-subtitle>
 
     <div class="mat-elevation-z8" *ngIf="project.pipelines">
         <table mat-table [dataSource]="project.pipelines">

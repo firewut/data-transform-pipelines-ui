@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { Project } from '../../projects/classes/project';
 import { Processor } from '../../projects/classes/processor';
 import { Pipeline, PipelineResult } from '../../projects/classes/pipeline';
+import { projection } from '@angular/core/src/render3/instructions';
 
 const API_URL = environment.apiUrl;
 const API_MEDIA_URL = environment.apiMediaUrl;
@@ -33,6 +34,7 @@ export class PaginatedResponse {
 
 @Injectable()
 export class APIService {
+  public API_URL = API_URL;
 
   constructor(
     private http: HttpClient,
@@ -79,6 +81,41 @@ export class APIService {
     return this.http.get<Processor>(
       `${API_URL}/processors/${id}/`,
       this.build_http_options()
+    ).pipe(
+      catchError(
+        this.handleError
+      )
+    );
+  }
+
+  public postPipeline(
+    project: Project,
+    title: string,
+    description?: string
+  ): Observable<Pipeline> {
+    return this.http.post<Pipeline>(
+      `${API_URL}/pipelines/`,
+      {
+        'project': project.id,
+        'title': title,
+        'description': description,
+      },
+      this.build_http_options(),
+    ).pipe(
+      catchError(
+        this.handleError
+      )
+    )
+  }
+
+  public postProject(title: string, description?: string): Observable<Project> {
+    return this.http.post<Project>(
+      `${API_URL}/projects/`,
+      {
+        'title': title,
+        'description': description
+      },
+      this.build_http_options(),
     ).pipe(
       catchError(
         this.handleError

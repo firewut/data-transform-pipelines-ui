@@ -9,7 +9,6 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
 import { APIService, PaginatedResponse } from '../services/api/api.service';
 import { Pipeline, PipelineResult } from './classes/pipeline';
 import { Processor, PipelineProcessor } from './classes/processor';
-import { $ } from 'protractor';
 
 @Component({
     selector: 'app-pipeline',
@@ -60,7 +59,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
         this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
             if (status === 202) {
                 this.data_file = null;
-                if ( this.pipeline.finishes_with_file ) {
+                if (this.pipeline.finishes_with_file) {
                     this.pipeline.result = new PipelineResult(
                         JSON.parse(response),
                         this.pipeline,

@@ -5,65 +5,51 @@
     <mat-card-content>
         <ol>
             <li>
-                <div>
-                    What's this?
-                    <p>
-                        Let's say this is a <b>"Data Processing Pipelines"</b>
-                    </p>
-                </div>
+                <h5>What's this?</h5>
+                <p>
+                    Let's say this is a <b>"Data Processing Pipelines"</b>
+                </p>
             </li>
             <li>
-                <div>
-                    What's Pipeline?
-                    <p>
-                        The Pipeline is a list of "Processors" which Transforms Data in the Way You Determined.
-                    </p>
-
-                    <p>Example:</p>
-                    <ul>
-                        <li>Upload an Image</li>
-                        <li>Resize to 200x200</li>
-                        <li>Grayscale it</li>
-                    </ul>
-                </div>
+                <h5>What's Pipeline?</h5>
+                <p>
+                    The Pipeline is a list of "Processors" that Transforms Data.
+                </p>
             </li>
             <li>
-                <div>
-                    How do I Try Pipeline?
-                    <p>
-                        Navigate to "Projects", select a Project, then a choose Pipeline.
-                    </p>
-                    <p>
-                        Let's assume that Your Pipeline has ID <b>1234</b>
-                    </p>
-                    <p>
-                        To Upload an Image we would need to execute this request
-                    </p>
-                    <pre>
-                        <code highlight>
-curl -X POST -F "file=@/full/path/to/file.png" \
-    "http://127.0.0.1:8000/api/v1/free/pipelines/1234/process/"
-                        </code>
-                    </pre>
-
-                    And receive a Result
-                    <pre>
-                        <code highlight>
-                                <![CDATA[
-{
-    "id": "e3c10ba0-8562-49d6-a132-fe6272e8a2b4",
-    "pipeline": "14f2da12-fe04-413f-bb0e-b046df6efbbe",
-    "result": null,
-    "error": null,
-    "is_finished": false,
-    "ctime": "2018-11-01T13:47:06.691713Z"
-}
-                                ]]>
-                        </code>
-                    </pre>
-
-
-                </div>
+                <h5>What Data can it process?</h5>
+                <p>
+                    Data types are limited by processor.
+                </p>
+                <p>
+                    Processor named <b>Resize</b> receives an <b>Image</b> and returns an <b>Image</b>
+                </p>
+                <p>Example of a Pipeline:</p>
+                <ul>
+                    <li>Upload an Image</li>
+                    <li>Resize to 500x500</li>
+                    <li>Grayscale it</li>
+                </ul>
+            </li>
+            <li>
+                <h5> How do I Try Pipeline?</h5>
+                <p>
+                    Pipelines organized to <b>Projects</b>
+                </p>
+                <p>
+                    Navigate to "Projects", select any and then a choose a Pipeline.
+                </p>
+            </li>
+            <li>
+                <h3>Is there any API?</h3>
+                <p>
+                    Sure! The documentation is served by Backend.
+                </p>
+                <p>
+                    <a mat-raised-button color="accent" href="{{ api_service.API_URL }}/docs/">
+                        Check it here
+                    </a>
+                </p>
             </li>
         </ol>
     </mat-card-content>

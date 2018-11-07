@@ -99,17 +99,23 @@ import { APIService } from './services/api/api.service';
 import { AboutComponent } from './projects/about.component';
 import { ProcessorsComponent } from './projects/processors.component';
 import { ProcessorComponent } from './projects/processor.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { ProjectComponent } from './projects/project.component';
+import { ProjectsComponent, CreateProjectDialog } from './projects/projects.component';
+import { ProjectComponent, CreatePipelineDialog } from './projects/project.component';
 import { PipelineComponent } from './projects/pipeline.component';
 
 @NgModule({
+  entryComponents: [
+    CreateProjectDialog,
+    CreatePipelineDialog,
+  ],
   declarations: [
     AppComponent,
     AboutComponent,
     ProcessorsComponent,
     ProcessorComponent,
     ProjectsComponent,
+    CreateProjectDialog,
+    CreatePipelineDialog,
     ProjectComponent,
     PipelineComponent,
   ],
