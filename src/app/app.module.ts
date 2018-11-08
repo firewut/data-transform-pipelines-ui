@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 import { DragulaModule } from 'ng2-dragula';
 import { HighlightModule } from 'ngx-highlightjs';
+import { MaterialDesignFrameworkModule } from 'angular6-json-schema-form';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
@@ -120,6 +122,7 @@ import { PipelineComponent } from './projects/pipeline.component';
     PipelineComponent,
   ],
   imports: [
+    MaterialDesignFrameworkModule,
     DragulaModule.forRoot(),
     NgSelectModule,
     BrowserModule,

@@ -34,7 +34,9 @@ export class PipelineComponent implements OnInit, OnDestroy {
         private api_service: APIService,
         private dragulaService: DragulaService,
     ) {
-
+        dragulaService.createGroup('processors', {
+            moves: (el, source, handle, sibling) => !el.classList.contains('mat-expanded')
+        });
     }
 
     ngOnInit() {
@@ -77,6 +79,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         // destroy all the subscriptions at once
         this.subs.unsubscribe();
+        this.dragulaService.destroy('processors');
     }
 
     getPipeline(id: string) {

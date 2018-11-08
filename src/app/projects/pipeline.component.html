@@ -13,67 +13,36 @@
                 <div dragula="{{ pipeline.id }}" [(dragulaModel)]="pipeline.processors" (dragulaModelChange)="pipelineChanged(pipeline)">
                     <mat-expansion-panel *ngFor="let processor of pipeline.processors" [class.invalid_pipe_processor]="processor.errors.length > 0">
                         <div *ngIf="processor.errors">
-                            <mat-error *ngFor="let error of processor.errors">{{ error }}</mat-error>
+                            <mat-error *ngFor="let error of processor.errors">{{ error | json }}</mat-error>
                         </div>
 
                         <mat-expansion-panel-header>
                             <mat-panel-title>{{ processor.id }}</mat-panel-title>
                         </mat-expansion-panel-header>
+
+                        <p>{{ processor.template.description }}</p>
+                        <div>
+                            <div *ngIf="processor.template.schema.in_config">
+                                <h4>Input Config</h4>
+                                <json-schema-form loadExternalAssets="true" [schema]="processor.template.schema.in_config"
+                                    [(data)]="processor.in_config" framework="material-design">
+                                </json-schema-form>
+                            </div>
+                            <div *ngIf="processor.template.schema.out_config">
+                                <h4>Output Config</h4>
+                                <json-schema-form loadExternalAssets="true" [schema]="processor.template.schema.out_config"
+                                    [(data)]="processor.out_config" framework="material-design">
+                                </json-schema-form>
+                            </div>
+                        </div>
+
                         <mat-action-row>
                             <button mat-button (click)="pipelineAction('remove_processor', pipeline, undefined, processor)">
                                 <mat-icon>delete_forever</mat-icon>
                                 Delete
                             </button>
                         </mat-action-row>
-
-                        <p>{{ processor.template.description }}</p>
-
-                        <mat-tab-group>
-                            <!-- INPUT/OUTPUT SCHEMAS -->
-                            <mat-tab label="Input Schema" *ngIf="processor.template.schema.in">
-                                <p>
-                                    <mat-form-field class="full-width">
-                                        <textarea matInput cdkTextareaAutosize placeholder="Input Schema" [value]="processor.template.schema.in | json"
-                                            readonly></textarea>
-                                    </mat-form-field>
-                                </p>
-                            </mat-tab>
-                            <mat-tab label="Output Schema" *ngIf="processor.template.schema.out">
-                                <p>
-                                    <mat-form-field class="full-width">
-                                        <textarea matInput cdkTextareaAutosize placeholder="Output Schema" [value]="processor.template.schema.out | json"
-                                            readonly></textarea>
-                                    </mat-form-field>
-                                </p>
-                            </mat-tab>
-                            <!-- INPUT/OUTPUT CONFIG SCHEMAS -->
-                            <mat-tab label="Input Config" *ngIf="processor.template.schema.in_config">
-                                <div class="va-equal">
-                                    <mat-form-field class="half-width">
-                                        <textarea matInput cdkTextareaAutosize placeholder="Input Config Schema"
-                                            [value]="processor.template.schema.in_config | json" readonly></textarea>
-                                    </mat-form-field>
-                                    <mat-form-field class="half-width">
-                                        <textarea matInput cdkTextareaAutosize placeholder="Input Config" [ngModel]="processor.in_config|json"
-                                            (ngModelChange)="processor.set_in_schema($event)"></textarea>
-                                    </mat-form-field>
-                                </div>
-                            </mat-tab>
-                            <mat-tab label="Output Config" *ngIf="processor.template.schema.out_config">
-                                <p>
-                                    <mat-form-field>
-                                        <textarea matInput cdkTextareaAutosize placeholder="Output Config Schema"
-                                            [value]="processor.template.schema.out_config | json" readonly></textarea>
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <textarea matInput cdkTextareaAutosize placeholder="Output Config" [ngModel]="processor.out_config"
-                                            (ngModelChange)="processor.set_out_schema($event)"></textarea>
-                                    </mat-form-field>
-                                    <p></p>
-                            </mat-tab>
-                        </mat-tab-group>
                     </mat-expansion-panel>
-
                 </div>
             </mat-accordion>
         </mat-card-content>

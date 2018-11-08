@@ -30,6 +30,7 @@ export class Processor {
     name: string;
     description: string;
     schema: ProcessorSchema;
+    _raw_schema: string;
 
     constructor(json: any) {
         this.id = json.id;
@@ -38,6 +39,7 @@ export class Processor {
         this.schema = new ProcessorSchema(
             json.schema
         );
+        this._raw_schema = json.schema;
     }
 
     public can_send_result(processor: Processor): boolean {
@@ -98,24 +100,12 @@ export class PipelineProcessor {
         return this.template.can_send_result(processor.template);
     }
 
-    public in_config_is_valid(): boolean {
-        var is_valid = true;
-
-        return is_valid;
-    }
-
-    public out_config_is_valid(): boolean {
-        var is_valid = true;
-
-        return is_valid;
-    }
-
     // TODO: DRY Refactor
     public set_in_schema(value?: any) {
         this.in_config = JSON.parse(value);
     }
 
     public set_out_schema(value?: any) {
-        this.in_config = JSON.parse(value);
+        this.out_config = JSON.parse(value);
     }
 }

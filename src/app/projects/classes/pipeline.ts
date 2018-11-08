@@ -243,20 +243,6 @@ export class Pipeline {
                     );
                 }
             }
-
-            // Check Processor Config
-            for (const processor of this.processors) {
-                if (processor.in_config_is_valid() === false) {
-                    processor.errors.push(
-                        'Input Config is invalid'
-                    );
-                }
-                if (processor.out_config_is_valid() === false) {
-                    processor.errors.push(
-                        'Output Config is invalid'
-                    );
-                }
-            }
         }
 
         this.requires_input = this._requires_input();

@@ -12,6 +12,10 @@ import { Processor } from './classes/processor';
 export class ProcessorComponent implements OnInit {
   processor: Processor;
 
+  jsonFormOptions = {
+    'addSubmit': false
+  };
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -21,7 +25,7 @@ export class ProcessorComponent implements OnInit {
   ngOnInit() {
     this.getProcessor(
       this.route.snapshot.paramMap.get('id')
-    )
+    );
   }
 
   getProcessor(id: string) {
