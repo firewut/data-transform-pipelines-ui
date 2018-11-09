@@ -13,6 +13,6 @@ export class AboutComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private api_service: APIService,
+    public api_service: APIService,
   ) { }
 }
