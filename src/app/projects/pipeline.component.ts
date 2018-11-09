@@ -34,9 +34,6 @@ export class PipelineComponent implements OnInit, OnDestroy {
         private api_service: APIService,
         private dragulaService: DragulaService,
     ) {
-        dragulaService.createGroup('processors', {
-            moves: (el, source, handle, sibling) => !el.classList.contains('mat-expanded')
-        });
     }
 
     ngOnInit() {
@@ -79,7 +76,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         // destroy all the subscriptions at once
         this.subs.unsubscribe();
-        this.dragulaService.destroy('processors');
+        this.dragulaService.destroy(this.pipeline.id);
     }
 
     getPipeline(id: string) {
@@ -87,6 +84,16 @@ export class PipelineComponent implements OnInit, OnDestroy {
             .subscribe(
                 (pipeline: Pipeline) => {
                     this.pipeline = new Pipeline(pipeline, this.api_service);
+
+                    // Disable Dragging when Expanded
+                    this.dragulaService.createGroup(this.pipeline.id, {
+                        revertOnSpill: true,
+                        moves: (el, source, handle, sibling) => {
+                            return !el.classList.contains('mat-expanded');
+                        }
+                    });
+
+
                     this.pipelineChanged(this.pipeline);
 
                     // Request a list of processors

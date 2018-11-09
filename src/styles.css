@@ -7,19 +7,24 @@
 html, body { 
     height: 100%; 
 }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+body { 
+    margin: 0; 
+    font-family: 'Roboto', sans-serif; 
+}
 
 table {
     width: 100%;
 }
 
 .container {
-    padding: 30px;
+    padding: 15px;
 }  
 
 .mat-row:hover {
     background-color: #fff8dc;
 }
+
 .invalid_pipe_processor {
     background-color: rgb(253, 248, 176);
 }
@@ -32,9 +37,9 @@ table {
     width: 50%;
 }
 
-.mat-form-field-underline {
+/* .mat-form-field-underline {
     display: none;
-}
+} */
 
 .va-equal {
     display: flex;

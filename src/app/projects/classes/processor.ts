@@ -31,6 +31,7 @@ export class Processor {
     description: string;
     schema: ProcessorSchema;
     _raw_schema: string;
+    ui_schema?: any;
 
     constructor(json: any) {
         this.id = json.id;
@@ -40,6 +41,7 @@ export class Processor {
             json.schema
         );
         this._raw_schema = json.schema;
+        this.ui_schema = json.ui_schema;
     }
 
     public can_send_result(processor: Processor): boolean {
