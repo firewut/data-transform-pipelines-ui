@@ -57,3 +57,9 @@ table {
     justify-content: space-between;
     align-items: center;
 }
+
+.processor_form {
+    padding: 10px;
+    background-color: whitesmoke;
+    border: solid 1px #eeeeee;
+};

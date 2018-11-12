@@ -20,8 +20,30 @@
                             <mat-panel-title>{{ processor.id }}</mat-panel-title>
                         </mat-expansion-panel-header>
 
-                        <p>{{ processor.template.description }}</p>
-                        <div>
+                        <mat-list>
+                            <mat-list-item>
+                                <mat-chip-list class="mat-chip-list">
+                                    Input:
+                                    <mat-chip *ngFor="let type of processor.template.schema.in_types" selected color="warn">
+                                        {{ type }}
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-chip-list class="mat-chip-list">
+                                    Output:
+                                    <mat-chip *ngFor="let type of processor.template.schema.out_types" selected color="warn">
+                                        {{ type }}
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </mat-list-item>
+                        </mat-list>
+
+                        <p>
+                            {{ processor.template.description }}
+                        </p>
+
+                        <div class="processor_form" *ngIf="processor.template.schema.in_config || processor.template.schema.out_config">
                             <div *ngIf="processor.template.schema.in_config">
                                 <h4>Input Config</h4>
                                 <json-schema-form loadExternalAssets="true" [schema]="processor.template.schema.in_config"

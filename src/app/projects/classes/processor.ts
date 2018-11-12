@@ -1,8 +1,10 @@
 export class ProcessorSchema {
     in: any;
+    in_types: Set<string>;
     in_config: any;
     in_config_example: any;
     out: any = {};
+    out_types: Set<string>;
     out_config: any = {};
     out_config_example: any;
 
@@ -22,6 +24,9 @@ export class ProcessorSchema {
         this.in_config_example = properties.in_config_example;
         this.out_config = properties.out_config;
         this.out_config_example = properties.out_config_example;
+
+        this.in_types = new Set(properties.in.type);
+        this.out_types = new Set(properties.out.type);
     }
 }
 
@@ -45,8 +50,19 @@ export class Processor {
     }
 
     public can_send_result(processor: Processor): boolean {
-        const out_types = new Set(this.schema.out.type);
-        const in_types = new Set(processor.schema.in.type);
+        const out_types: Set<string> = new Set();
+        this.schema.out_types.forEach(
+            (value: string) => {
+                out_types.add(value);
+            }
+        );
+
+        const in_types: Set<string> = new Set();
+        processor.schema.in_types.forEach(
+            (value: string) => {
+                in_types.add(value);
+            }
+        );
 
         in_types.delete('null');
         out_types.delete('null');

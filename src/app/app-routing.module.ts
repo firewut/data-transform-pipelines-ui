@@ -7,9 +7,11 @@ import { ProcessorComponent } from './projects/processor.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectComponent } from './projects/project.component';
 import { PipelineComponent } from './projects/pipeline.component';
+import { WelcomeComponent } from './projects/welcome.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'projects', pathMatch: 'full' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'processors', component: ProcessorsComponent },
   { path: 'processors/:id', component: ProcessorComponent },

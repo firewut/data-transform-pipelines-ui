@@ -104,6 +104,7 @@ import { ProcessorComponent } from './projects/processor.component';
 import { ProjectsComponent, CreateProjectDialog } from './projects/projects.component';
 import { ProjectComponent, CreatePipelineDialog } from './projects/project.component';
 import { PipelineComponent } from './projects/pipeline.component';
+import { WelcomeComponent } from './projects/welcome.component';
 
 @NgModule({
   entryComponents: [
@@ -111,6 +112,7 @@ import { PipelineComponent } from './projects/pipeline.component';
     CreatePipelineDialog,
   ],
   declarations: [
+    WelcomeComponent,
     AppComponent,
     AboutComponent,
     ProcessorsComponent,
