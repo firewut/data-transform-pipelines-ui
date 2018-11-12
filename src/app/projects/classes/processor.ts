@@ -107,8 +107,8 @@ export class PipelineProcessor {
         }
         if (processor) {
             this.id = processor.id;
-            this.in_config = processor.schema.in_config_example;
-            this.out_config = processor.schema.out_config_example;
+            this.in_config = processor.schema.in_config;
+            this.out_config = processor.schema.out_config;
             this.template = processor;
         }
         this._hash = Math.random().toString(36).replace('0.', '');
