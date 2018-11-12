@@ -7,7 +7,9 @@ This is a GUI for a Pipelined Data Processing.
 
 You can build own Pipe and Send Any Data to it.
 
-![Pipeline](screenshots/pipeline.PNG "Markdown from HTML Page")
+![Pipeline Form](screenshots/pipeline_1_form.PNG "Pipeline Form")
+
+![Pipeline Result](screenshots/pipeline_1_result.PNG "Pipeline Result")
 
 
 # DataTransform
