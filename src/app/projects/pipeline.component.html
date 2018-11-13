@@ -20,24 +20,19 @@
                             <mat-panel-title>{{ processor.id }}</mat-panel-title>
                         </mat-expansion-panel-header>
 
-                        <mat-list>
-                            <mat-list-item>
-                                <mat-chip-list class="mat-chip-list">
-                                    Input:
-                                    <mat-chip *ngFor="let type of processor.template.schema.in_types" selected color="warn">
-                                        {{ type }}
-                                    </mat-chip>
-                                </mat-chip-list>
-                            </mat-list-item>
-                            <mat-list-item>
-                                <mat-chip-list class="mat-chip-list">
-                                    Output:
-                                    <mat-chip *ngFor="let type of processor.template.schema.out_types" selected color="warn">
-                                        {{ type }}
-                                    </mat-chip>
-                                </mat-chip-list>
-                            </mat-list-item>
-                        </mat-list>
+                        <mat-chip-list class="mat-chip-list">
+                            Input:
+                            <mat-chip *ngFor="let type of processor.template.schema.in_types" selected color="warn">
+                                {{ type }}
+                            </mat-chip>
+                        </mat-chip-list>
+
+                        <mat-chip-list class="mat-chip-list">
+                            Output:
+                            <mat-chip *ngFor="let type of processor.template.schema.out_types" selected color="warn">
+                                {{ type }}
+                            </mat-chip>
+                        </mat-chip-list>
 
                         <p>
                             {{ processor.template.description }}
@@ -68,55 +63,47 @@
                     </mat-expansion-panel>
                 </div>
             </mat-accordion>
-        </mat-card-content>
-    </mat-card-content>
-
-    <mat-card-content>
-        <mat-card-subtitle>Pipeline Actions</mat-card-subtitle>
-        <div>
             <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
                 <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
             </ng-select>
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Try Pipeline</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                    <p *ngIf="!pipeline.starts_with_file">
-                        <mat-form-field class="full-width" appearance="outline">
-                            <textarea matInput cdkTextareaAutosize placeholder="Enter Value" [(ngModel)]="data"
-                                [disabled]="!pipeline.requires_input"></textarea>
-                        </mat-form-field>
-                        <button mat-button (click)="pipelineAction('process', pipeline)">
-                            <mat-icon>send</mat-icon>
-                            Send
-                        </button>
-                    </p>
-                    <p *ngIf="pipeline.starts_with_file">
-                        <input type="file" name="file" class="full-width" ng2FileSelect [uploader]="uploader"
-                            [(ngModel)]="data_file" />
-                        <button mat-button (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                            <mat-icon>send</mat-icon>
-                            Upload
-                        </button>
-                    </p>
-                    <p *ngIf="pipeline.result">
-                        <textarea matInput cdkTextareaAutosize placeholder="Result" [value]="pipeline.result | json"
-                            readonly></textarea>
-                        <img mat-card-image [src]="pipeline.result.get_image()">
-                    </p>
-                </mat-card-content>
-            </mat-card>
-
-            <button mat-button [disabled]="!pipeline.should_be_saved" (click)="pipelineAction('save', pipeline)">
-                <mat-icon>save</mat-icon>
-                Save
-            </button>
-            <button mat-button (click)="pipelineAction('delete', pipeline)">
-                <mat-icon>delete_forever</mat-icon>
-                Delete
-            </button>
-        </div>
+        </mat-card-content>
     </mat-card-content>
     <mat-progress-bar *ngIf="pipeline.is_processing" mode="indeterminate"></mat-progress-bar>
+    <mat-card-actions>
+        <button mat-button [disabled]="!pipeline.should_be_saved" (click)="pipelineAction('save', pipeline)">
+            <!-- <mat-icon>save</mat-icon> -->
+            SAVE
+        </button>
+        <button mat-button (click)="pipelineAction('delete', pipeline)">
+            <!-- <mat-icon>delete_forever</mat-icon> -->
+            DELETE
+        </button>
+    </mat-card-actions>
+
+    <mat-card>
+        <mat-card-title>Try It</mat-card-title>
+        <mat-card-content>
+            <p *ngIf="!pipeline.starts_with_file">
+                <mat-form-field class="full-width" appearance="outline" *ngIf="pipeline.requires_input">
+                    <textarea matInput cdkTextareaAutosize placeholder="Enter Value" [(ngModel)]="data"></textarea>
+                </mat-form-field>
+                <button mat-button (click)="pipelineAction('process', pipeline)">
+                    <mat-icon>send</mat-icon>
+                    Send
+                </button>
+            </p>
+            <p *ngIf="pipeline.starts_with_file">
+                <input type="file" name="file" class="full-width" ng2FileSelect [uploader]="uploader" [(ngModel)]="data_file" />
+                <button mat-button (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <mat-icon>send</mat-icon>
+                    Upload
+                </button>
+            </p>
+            <div *ngIf="pipeline.result">
+                <pre><code highlight [textContent]="pipeline.result | json"></code></pre>
+                <img mat-card-image [src]="pipeline.result.get_image()">
+            </div>
+
+        </mat-card-content>
+    </mat-card>
 </mat-card>
