@@ -8,7 +8,6 @@ import { environment } from '../../../environments/environment';
 import { Project } from '../../projects/classes/project';
 import { Processor } from '../../projects/classes/processor';
 import { Pipeline, PipelineResult } from '../../projects/classes/pipeline';
-import { projection } from '@angular/core/src/render3/instructions';
 
 const API_URL = environment.apiUrl;
 const API_MEDIA_URL = environment.apiMediaUrl;

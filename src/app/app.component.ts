@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { environment } from '../environments/environment';
+
+const trackers = environment.trackers;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +11,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'data-transform';
+  googleAnalyticsUA: string = undefined;
+
+  constructor() {
+    this.googleAnalyticsUA = trackers.googleAnalyticsUA;
+  }
 }

@@ -8,6 +8,9 @@ export const environment = {
   // URL of development API
   apiUrl: `http://localhost:8000/api/v1/free`,
   apiMediaUrl: `http://localhost:8000`,
+  trackers: {
+    googleAnalyticsUA: ``,
+  }
 };
 
 /*
