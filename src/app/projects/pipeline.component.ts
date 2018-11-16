@@ -7,6 +7,7 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
 
 
 import { APIService, PaginatedResponse } from '../services/api/api.service';
+import { GoogleAnalyticsEventsService } from '../services/google/analytics.service';
 import { Pipeline, PipelineResult } from './classes/pipeline';
 import { Processor, PipelineProcessor } from './classes/processor';
 
@@ -32,6 +33,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
         private router: Router,
         private route: ActivatedRoute,
         private api_service: APIService,
+        private analytics: GoogleAnalyticsEventsService,
         private dragulaService: DragulaService,
     ) {
     }
@@ -65,7 +67,11 @@ export class PipelineComponent implements OnInit, OnDestroy {
                     );
                     this.pipeline.start_refreshing_result(
                         (_result: any) => {
-                            // pass
+                            this.analytics.sendEvent(
+                                'processing',
+                                'completed',
+                                'file',
+                            );
                         }
                     );
                 }
@@ -134,10 +140,19 @@ export class PipelineComponent implements OnInit, OnDestroy {
                 }
                 break;
             case 'process':
-                pipeline.process_with_refresh({
-                    'data': this.data,
-                    'processors': pipeline.processors,
-                });
+                pipeline.process_with_refresh(
+                    {
+                        'data': this.data,
+                        'processors': pipeline.processors,
+                    },
+                    (result: any) => {
+                        this.analytics.sendEvent(
+                            'processing',
+                            'completed',
+                            'data',
+                        );
+                    }
+                );
                 break;
             case 'delete':
                 alert("Not Yet Implemented");

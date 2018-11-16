@@ -1,15 +1,3 @@
-<div *ngIf="googleAnalyticsUA">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ googleAnalyticsUA }}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', '{{ googleAnalyticsUA }}');
-  </script>
-</div>
-
 <mat-toolbar>
   <mat-toolbar-row>
     <a mat-raised-button routerLink="/projects" routerLinkActive="active">

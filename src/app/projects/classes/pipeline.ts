@@ -131,7 +131,6 @@ export class Pipeline {
                 );
                 if (this.result.is_finished) {
                     this.stop_refreshing_result();
-
                     if (callback) {
                         callback(this.result);
                     }

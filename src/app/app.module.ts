@@ -98,6 +98,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { APIService } from './services/api/api.service';
+import { GoogleAnalyticsEventsService } from './services/google/analytics.service';
 import { AboutComponent } from './projects/about.component';
 import { ProcessorsComponent } from './projects/processors.component';
 import { ProcessorComponent } from './projects/processor.component';
@@ -140,6 +141,7 @@ import { WelcomeComponent } from './projects/welcome.component';
   ],
   providers: [
     APIService,
+    GoogleAnalyticsEventsService,
   ],
   bootstrap: [AppComponent]
 })
