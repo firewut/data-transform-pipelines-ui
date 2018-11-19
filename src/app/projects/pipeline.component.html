@@ -6,8 +6,26 @@
         <textarea matInput class="full-width" cdkTextareaAutosize placeholder="Description" [(ngModel)]="pipeline.description"></textarea>
     </mat-card-content>
 
+    <mat-card-content *ngIf="pipeline.in_types">
+        <p>
+            <mat-chip-list class="mat-chip-list" *ngIf="pipeline.in_types">
+                Input:
+                <mat-chip *ngFor="let type of pipeline.in_types" selected color="warn">
+                    {{ type }}
+                </mat-chip>
+            </mat-chip-list>
+
+            <mat-chip-list class="mat-chip-list" *ngIf="pipeline.out_types">
+                Output:
+                <mat-chip *ngFor="let type of pipeline.out_types" selected color="warn">
+                    {{ type }}
+                </mat-chip>
+            </mat-chip-list>
+        </p>
+    </mat-card-content>
+
     <mat-card-content>
-        <mat-card-subtitle>Processors</mat-card-subtitle>
+        <mat-card-title>Processors</mat-card-title>
         <mat-card-content>
             <mat-accordion class="headers-align" multi="true">
                 <div dragula="{{ pipeline.id }}" [(dragulaModel)]="pipeline.processors" (dragulaModelChange)="pipelineChanged(pipeline)">
@@ -63,10 +81,10 @@
                     </mat-expansion-panel>
                 </div>
             </mat-accordion>
-            <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
-                <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
-            </ng-select>
         </mat-card-content>
+        <ng-select (change)="pipelineAction('add_processor', pipeline, $event)" placeholder="Add Processor">
+            <ng-option *ngFor="let processor of processors" [value]="processor.id">{{ processor.id }}</ng-option>
+        </ng-select>
     </mat-card-content>
     <mat-progress-bar *ngIf="pipeline.is_processing" mode="indeterminate"></mat-progress-bar>
     <mat-card-actions>

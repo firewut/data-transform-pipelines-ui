@@ -69,6 +69,9 @@ export class Pipeline {
     requires_input = false;
     result?: PipelineResult;
 
+    in_types: Set<string>;
+    out_types: Set<string>;
+
     api_service?: APIService;
     subscription: Subscription;
 
@@ -92,6 +95,18 @@ export class Pipeline {
 
         // Execute a check
         this.checkProcessors();
+    }
+
+    public setInputOutput() {
+        if (this.processors && this.processors.length > 0) {
+            this.in_types = this.processors[0].template.schema.in_types;
+            this.out_types = this.processors[
+                this.processors.length - 1
+            ].template.schema.out_types;
+        } else {
+            this.in_types = undefined;
+            this.out_types = undefined;
+        }
     }
 
     public toJSON(): any {
@@ -247,6 +262,8 @@ export class Pipeline {
         this.requires_input = this._requires_input();
         this.starts_with_file = this._check_starts_with_file();
         this.finishes_with_file = this._check_finishes_with_file();
+
+        this.setInputOutput();
 
         return [...misplaced_processors, ...unconfigured_processors];
     }
