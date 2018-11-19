@@ -117,13 +117,4 @@ export class PipelineProcessor {
     public can_send_result(processor: PipelineProcessor): boolean {
         return this.template.can_send_result(processor.template);
     }
-
-    // TODO: DRY Refactor
-    public set_in_schema(value?: any) {
-        this.in_config = JSON.parse(value);
-    }
-
-    public set_out_schema(value?: any) {
-        this.out_config = JSON.parse(value);
-    }
 }

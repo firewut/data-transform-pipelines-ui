@@ -117,7 +117,7 @@
                     Upload
                 </button>
             </p>
-            <div *ngIf="pipeline.result">
+            <div *ngIf="pipeline.result" class="processor_form">
                 <pre><code highlight [textContent]="pipeline.result | json"></code></pre>
                 <img mat-card-image [src]="pipeline.result.get_image()">
             </div>
