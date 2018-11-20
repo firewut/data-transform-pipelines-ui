@@ -47,7 +47,7 @@ export class CreatePipelineDialog {
 })
 export class ProjectComponent implements OnInit {
   project: Project;
-  displayedColumns: string[] = ['title', 'description', 'mtime', 'processors'];
+  displayedColumns: string[] = ['title', 'description', 'processors'];
 
   constructor(
     private router: Router,

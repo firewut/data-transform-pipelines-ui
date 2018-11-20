@@ -25,10 +25,6 @@
                 <th mat-header-cell *matHeaderCellDef>Processors</th>
                 <td mat-cell *matCellDef="let pipeline"> {{ pipeline.processors.length }} </td>
             </ng-container>
-            <ng-container matColumnDef="mtime">
-                <th mat-header-cell *matHeaderCellDef>Modified</th>
-                <td mat-cell *matCellDef="let pipeline"> {{ pipeline.mtime | date:"short" }} </td>
-            </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row matRipple routerLink="/pipelines/{{ pipeline.id }}/" *matRowDef="let pipeline; columns: displayedColumns"></tr>

@@ -45,7 +45,7 @@ export class CreateProjectDialog {
 })
 export class ProjectsComponent implements OnInit, AfterViewInit {
   dataSource: PaginatedDataSource;
-  displayedColumns: string[] = ['title', 'description', 'pipelines', 'mtime'];
+  displayedColumns: string[] = ['title', 'description', 'pipelines'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
