@@ -8,7 +8,6 @@ import { DragulaModule } from 'ng2-dragula';
 import { HighlightModule } from 'ngx-highlightjs';
 import { MaterialDesignFrameworkModule } from 'angular6-json-schema-form';
 
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
@@ -105,7 +104,6 @@ import { ProcessorComponent } from './projects/processor.component';
 import { ProjectsComponent, CreateProjectDialog } from './projects/projects.component';
 import { ProjectComponent, CreatePipelineDialog } from './projects/project.component';
 import { PipelineComponent } from './projects/pipeline.component';
-import { WelcomeComponent } from './projects/welcome.component';
 
 @NgModule({
   entryComponents: [
@@ -113,7 +111,6 @@ import { WelcomeComponent } from './projects/welcome.component';
     CreatePipelineDialog,
   ],
   declarations: [
-    WelcomeComponent,
     AppComponent,
     AboutComponent,
     ProcessorsComponent,
@@ -136,7 +133,7 @@ import { WelcomeComponent } from './projects/welcome.component';
     FormsModule,
     FileUploadModule,
     HighlightModule.forRoot({
-      theme: 'default'
+      theme: 'agate'
     }),
   ],
   providers: [

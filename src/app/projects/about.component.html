@@ -1,68 +1,32 @@
 <mat-card>
-    <mat-card-title>
-        FAQ
-    </mat-card-title>
     <mat-card-content>
-        <ol>
-            <li>
-                <h3>What's this?</h3>
-                <p>
-                    Let's say this is a <b>"Data Processing Pipelines"</b>
-                </p>
-            </li>
-            <li>
-                <h3>What's Pipeline?</h3>
-                <p>
-                    The Pipeline is a list of "Processors" that Transforms Data.
-                </p>
-            </li>
-            <li>
-                <h3>What Data can it process?</h3>
-                <p>
-                    Data types are limited by processor.
-                </p>
-                <p>
-                    Processor named <b>Resize</b> receives an <b>Image</b> and returns an <b>Image</b>
-                </p>
-                <p>Example of a Pipeline:</p>
-                <ul>
-                    <li>Upload an Image</li>
-                    <li>Resize to 500x500</li>
-                    <li>Grayscale it</li>
-                </ul>
-            </li>
-            <li>
-                <h3> How do I Try Pipeline?</h3>
-                <p>
-                    Pipelines organized to <b>Projects</b>
-                </p>
-                <p>
-                    Navigate to "Projects", select any and then a choose a Pipeline.
-                </p>
-            </li>
-            <li>
-                <h3>Is there any API?</h3>
-                <p>
-                    Sure! The documentation is served by Backend.
-                </p>
-                <p>
-                    <a mat-raised-button color="accent" href="{{ api_service.API_URL }}/docs/">
-                        Check it here
-                    </a>
-                </p>
-            </li>
-        </ol>
+        <h1>What can this Project do?</h1>
+        It can process Any Data You pass using Rules You Determine.
 
-        <mat-card-title>
-            It's Opensourced:
-        </mat-card-title>
-        <ol>
-            <li>
-                <a href="https://github.com/firewut/data-transform-pipelines-ui">Frontend</a>
-            </li>
-            <li>
-                <a href="https://github.com/firewut/data-transform-pipelines-api">Backend</a>
-            </li>
-        </ol>
+        <h3>Example: Image Operations</h3>
+
+        <mat-grid-list cols="1" rowHeight="200px" role="list" gutterSize="10px">
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Original</mat-grid-tile-header>
+                <img src="/assets/example/original.png" class="example-image">
+            </mat-grid-tile>
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Resize</mat-grid-tile-header>
+                <img src="/assets/example/resized.png" class="example-image">
+            </mat-grid-tile>
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Grayscale</mat-grid-tile-header>
+                <img src="/assets/example/grayscaled.png" class="example-image">
+            </mat-grid-tile>
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Watermark</mat-grid-tile-header>
+                <img src="/assets/example/watermarked.png" class="example-image">
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <h3>
+            Check <a routerLink="/projects">Projects</a> Tab for more Examples
+        </h3>
+
     </mat-card-content>
 </mat-card>
