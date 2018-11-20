@@ -8,7 +8,6 @@ import { DragulaModule } from 'ng2-dragula';
 import { HighlightModule } from 'ngx-highlightjs';
 import { MaterialDesignFrameworkModule } from 'angular6-json-schema-form';
 
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
@@ -134,7 +133,7 @@ import { PipelineComponent } from './projects/pipeline.component';
     FormsModule,
     FileUploadModule,
     HighlightModule.forRoot({
-      theme: 'default'
+      theme: 'agate'
     }),
   ],
   providers: [

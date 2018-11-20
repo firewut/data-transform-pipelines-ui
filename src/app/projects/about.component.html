@@ -1,27 +1,32 @@
 <mat-card>
     <mat-card-content>
         <h1>What can this Project do?</h1>
+        It can process Any Data You pass using Rules You Determine.
 
-        Check these out
+        <h3>Example: Image Operations</h3>
 
-        <mat-list>
-            <mat-list-item>
-                <h4 mat-line>What's this?</h4>
-                <p mat-line>
-                    Let's say this is a <b>Pipelines</b> which does <b>"Data Processing"</b>
-                </p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 mat-line>What's Pipeline?</h4>
-                <p mat-line>
-                    The <b>Pipeline</b> is a list of <b>Processors</b> that Transforms Data.
-                </p>
-            </mat-list-item>
-            <mat-list-item>
-                <h4 mat-line>Example</h4>
-                <p>
-                </p>
-            </mat-list-item>
-        </mat-list>
+        <mat-grid-list cols="1" rowHeight="200px" role="list" gutterSize="10px">
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Original</mat-grid-tile-header>
+                <img src="/assets/example/original.png" class="example-image">
+            </mat-grid-tile>
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Resize</mat-grid-tile-header>
+                <img src="/assets/example/resized.png" class="example-image">
+            </mat-grid-tile>
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Grayscale</mat-grid-tile-header>
+                <img src="/assets/example/grayscaled.png" class="example-image">
+            </mat-grid-tile>
+            <mat-grid-tile role="listitem">
+                <mat-grid-tile-header>Watermark</mat-grid-tile-header>
+                <img src="/assets/example/watermarked.png" class="example-image">
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <h3>
+            Check <a routerLink="/projects">Projects</a> Tab for more Examples
+        </h3>
+
     </mat-card-content>
 </mat-card>
