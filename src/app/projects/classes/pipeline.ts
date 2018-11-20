@@ -27,7 +27,12 @@ export class PipelineResult {
         if (this.pipeline) {
             if (this.pipeline.finishes_with_file) {
                 if (this.is_finished) {
-                    image_url = this.pipeline.get_result_file_url(this.result);
+                    if (
+                        this.result.hasOwnProperty('mimetype') &&
+                        this.result.mimetype.includes('image/')
+                    ) {
+                        image_url = this.pipeline.get_result_file_url(this.result);
+                    }
                 }
             }
         }
