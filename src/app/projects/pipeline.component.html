@@ -7,21 +7,20 @@
     </mat-card-content>
 
     <mat-card-content *ngIf="pipeline.in_types">
-        <p>
-            <mat-chip-list class="mat-chip-list" *ngIf="pipeline.in_types">
-                Input:
-                <mat-chip *ngFor="let type of pipeline.in_types" selected color="warn">
-                    {{ type }}
-                </mat-chip>
-            </mat-chip-list>
-
-            <mat-chip-list class="mat-chip-list" *ngIf="pipeline.out_types">
-                Output:
-                <mat-chip *ngFor="let type of pipeline.out_types" selected color="warn">
-                    {{ type }}
-                </mat-chip>
-            </mat-chip-list>
-        </p>
+        <mat-card-subtitle>Input</mat-card-subtitle>
+        <mat-chip-list>
+            <mat-chip *ngFor="let type of pipeline.in_types" selected color="warn">
+                {{ type }}
+            </mat-chip>
+        </mat-chip-list>
+    </mat-card-content>
+    <mat-card-content *ngIf="pipeline.out_types">
+        <mat-card-subtitle>Output</mat-card-subtitle>
+        <mat-chip-list>
+            <mat-chip *ngFor="let type of pipeline.out_types" selected color="warn">
+                {{ type }}
+            </mat-chip>
+        </mat-chip-list>
     </mat-card-content>
 
     <mat-card-content>
@@ -38,19 +37,22 @@
                             <mat-panel-title>{{ processor.id }}</mat-panel-title>
                         </mat-expansion-panel-header>
 
-                        <mat-chip-list class="mat-chip-list">
-                            Input:
-                            <mat-chip *ngFor="let type of processor.template.schema.in_types" selected color="warn">
-                                {{ type }}
-                            </mat-chip>
-                        </mat-chip-list>
-
-                        <mat-chip-list class="mat-chip-list">
-                            Output:
-                            <mat-chip *ngFor="let type of processor.template.schema.out_types" selected color="warn">
-                                {{ type }}
-                            </mat-chip>
-                        </mat-chip-list>
+                        <mat-card-content>
+                            <mat-card-subtitle>Input</mat-card-subtitle>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let type of processor.template.schema.in_types" selected color="warn">
+                                    {{ type }}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </mat-card-content>
+                        <mat-card-content>
+                            <mat-card-subtitle>Output</mat-card-subtitle>
+                            <mat-chip-list>
+                                <mat-chip *ngFor="let type of processor.template.schema.out_types" selected color="warn">
+                                    {{ type }}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </mat-card-content>
 
                         <p>
                             {{ processor.template.description }}
