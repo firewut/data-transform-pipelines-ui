@@ -6,26 +6,21 @@
         <textarea matInput class="full-width" cdkTextareaAutosize placeholder="Description" [(ngModel)]="pipeline.description"></textarea>
     </mat-card-content>
 
-    <mat-card-content>
-        <mat-list role="list">
-            <mat-list-item role="listitem" *ngIf="pipeline.in_types">
-                <h3 matSubheader *ngIf="pipeline.in_types">Input</h3>
-                <mat-chip-list>
-                    <mat-chip *ngFor="let type of pipeline.in_types" selected color="warn">
-                        {{ type }}
-                    </mat-chip>
-                </mat-chip-list>
-            </mat-list-item>
-            <mat-list-item role="listitem" *ngIf="pipeline.out_types">
-                <h3 matSubheader *ngIf="pipeline.out_types">Output</h3>
-                <mat-chip-list>
-                    <mat-chip *ngFor="let type of pipeline.out_types" selected color="warn">
-                        {{ type }}
-                    </mat-chip>
-                </mat-chip-list>
-            </mat-list-item>
-        </mat-list>
-
+    <mat-card-content *ngIf="pipeline.in_types">
+        <mat-card-subtitle>Input</mat-card-subtitle>
+        <mat-chip-list>
+            <mat-chip *ngFor="let type of pipeline.in_types" selected color="warn">
+                {{ type }}
+            </mat-chip>
+        </mat-chip-list>
+    </mat-card-content>
+    <mat-card-content *ngIf="pipeline.out_types">
+        <mat-card-subtitle>Output</mat-card-subtitle>
+        <mat-chip-list>
+            <mat-chip *ngFor="let type of pipeline.out_types" selected color="warn">
+                {{ type }}
+            </mat-chip>
+        </mat-chip-list>
     </mat-card-content>
 
     <mat-card-content>
@@ -42,22 +37,22 @@
                             <mat-panel-title>{{ processor.id }}</mat-panel-title>
                         </mat-expansion-panel-header>
 
-                        <h3 matSubheader>Input</h3>
-                        <mat-list-item role="listitem">
-                            <mat-chip-list class="mat-chip-list">
+                        <mat-card-content>
+                            <mat-card-subtitle>Input</mat-card-subtitle>
+                            <mat-chip-list>
                                 <mat-chip *ngFor="let type of processor.template.schema.in_types" selected color="warn">
                                     {{ type }}
                                 </mat-chip>
                             </mat-chip-list>
-                        </mat-list-item>
-                        <h3 matSubheader>Output</h3>
-                        <mat-list-item role="listitem">
-                            <mat-chip-list class="mat-chip-list">
+                        </mat-card-content>
+                        <mat-card-content>
+                            <mat-card-subtitle>Output</mat-card-subtitle>
+                            <mat-chip-list>
                                 <mat-chip *ngFor="let type of processor.template.schema.out_types" selected color="warn">
                                     {{ type }}
                                 </mat-chip>
                             </mat-chip-list>
-                        </mat-list-item>
+                        </mat-card-content>
 
                         <p>
                             {{ processor.template.description }}
