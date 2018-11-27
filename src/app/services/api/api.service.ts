@@ -9,8 +9,8 @@ import { Project } from '../../projects/classes/project';
 import { Processor } from '../../projects/classes/processor';
 import { Pipeline, PipelineResult } from '../../projects/classes/pipeline';
 
+const API_HOST = environment.apiHost;
 const API_URL = environment.apiUrl;
-const API_MEDIA_URL = environment.apiMediaUrl;
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -34,6 +34,7 @@ export class PaginatedResponse {
 @Injectable()
 export class APIService {
   public API_URL = API_URL;
+  public API_HOST = API_HOST;
 
   constructor(
     private http: HttpClient,
@@ -43,7 +44,7 @@ export class APIService {
     let result_url = '';
     if (result) {
       if (result.hasOwnProperty('url')) {
-        result_url = `${API_MEDIA_URL}${result.url}`;
+        result_url = `${API_HOST}${result.url}`;
       }
     }
     return result_url;

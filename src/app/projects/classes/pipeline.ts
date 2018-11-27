@@ -22,22 +22,33 @@ export class PipelineResult {
         this.is_finished = json.is_finished;
     }
 
-    public get_image(): string {
-        let image_url = '';
+    public get_file_url(): string {
+        let file_url = '';
+
         if (this.pipeline) {
             if (this.pipeline.finishes_with_file) {
                 if (this.is_finished) {
-                    if (
-                        this.result.hasOwnProperty('mimetype') &&
-                        this.result.mimetype.includes('image/')
-                    ) {
-                        image_url = this.pipeline.get_result_file_url(this.result);
-                    }
+                    file_url = this.pipeline.get_result_file_url(this.result);
                 }
             }
         }
 
-        return image_url;
+        return file_url;
+    }
+
+    public get_image(): string {
+        let file_url = this.get_file_url();
+
+        if (
+            (file_url !== '') && (
+                !this.result.hasOwnProperty('mimetype') ||
+                !this.result.mimetype.includes('image/')
+            )
+        ) {
+            file_url = '';
+        }
+
+        return file_url;
     }
 
     public toJSON(): any {
