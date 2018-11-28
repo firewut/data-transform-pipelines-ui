@@ -61,20 +61,23 @@ export class PipelineComponent implements OnInit, OnDestroy {
             if (status === 202) {
                 this.data_file = null;
                 if (this.pipeline.finishes_with_file) {
-                    this.pipeline.result = new PipelineResult(
+                    const result = new PipelineResult(
                         JSON.parse(response),
                         this.pipeline,
                     );
-                    this.pipeline.start_refreshing_result(
-                        this.pipeline_result.id,
-                        (_result: any) => {
-                            this.analytics.sendEvent(
-                                'processing',
-                                'completed',
-                                'file',
-                            );
-                        }
-                    );
+                    if (result !== undefined) {
+                        this.pipeline.result = result;
+                        this.pipeline.start_refreshing_result(
+                            result.id,
+                            (_result: any) => {
+                                this.analytics.sendEvent(
+                                    'processing',
+                                    'completed',
+                                    'file',
+                                );
+                            }
+                        );
+                    }
                 }
             }
         };
