@@ -1,5 +1,6 @@
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry, map } from 'rxjs/operators';
+import { catchError, share } from 'rxjs/operators';
+
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
@@ -65,6 +66,8 @@ export class APIService {
       this.build_http_options()
     ).pipe(
       catchError(this.handleError)
+    ).pipe(
+      share()
     );
   }
 
@@ -74,6 +77,8 @@ export class APIService {
       this.build_http_options()
     ).pipe(
       catchError(this.handleError)
+    ).pipe(
+      share()
     );
   }
 
@@ -85,6 +90,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -105,7 +112,9 @@ export class APIService {
       catchError(
         this.handleError
       )
-    )
+    ).pipe(
+      share()
+    );
   }
 
   public postProject(title: string, description?: string): Observable<Project> {
@@ -120,6 +129,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -132,6 +143,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -143,6 +156,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -157,6 +172,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -168,6 +185,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -182,6 +201,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 

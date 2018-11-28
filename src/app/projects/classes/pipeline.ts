@@ -149,10 +149,10 @@ export class Pipeline {
         }
     }
 
-    public start_refreshing_result(callback?: any) {
+    public start_refreshing_result(result_id: string, callback?: any) {
         this.subscription = timer(0, 1000).pipe(
             switchMap(
-                () => this.refresh_result()
+                () => this.refresh_result(result_id)
             )
         ).subscribe(
             (pipeline_result_json: any) => {
@@ -171,12 +171,18 @@ export class Pipeline {
     }
 
     public process_with_refresh(data: any, callback?: any): Observable<PipelineResult> {
-        const result = this.process(data);
-
         this.stop_refreshing_result();
 
+        const result = this.process(data);
+
         result.subscribe(
-            (_: any) => this.start_refreshing_result(callback)
+            (pipeline_result_json: any) => {
+                const pipeline_result = new PipelineResult(
+                    pipeline_result_json,
+                    this,
+                );
+                this.start_refreshing_result(pipeline_result.id, callback);
+            }
         );
 
         return result;
@@ -196,8 +202,8 @@ export class Pipeline {
         return process_result;
     }
 
-    public refresh_result(): Observable<PipelineResult> {
-        const result = this.api_service.refreshPipelineResult(this.result.id);
+    public refresh_result(result_id: string): Observable<PipelineResult> {
+        const result = this.api_service.refreshPipelineResult(result_id);
         result.subscribe(
             (pipeline_result_json: any) => {
                 this.result = new PipelineResult(

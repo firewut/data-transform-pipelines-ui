@@ -66,6 +66,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
                         this.pipeline,
                     );
                     this.pipeline.start_refreshing_result(
+                        this.pipeline_result.id,
                         (_result: any) => {
                             this.analytics.sendEvent(
                                 'processing',
@@ -155,7 +156,7 @@ export class PipelineComponent implements OnInit, OnDestroy {
                 );
                 break;
             case 'delete':
-                alert("Not Yet Implemented");
+                alert('Not Yet Implemented');
                 break;
             case 'remove_processor':
                 if (processor !== undefined) {
