@@ -1,5 +1,6 @@
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry, map } from 'rxjs/operators';
+import { catchError, share } from 'rxjs/operators';
+
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
@@ -9,8 +10,8 @@ import { Project } from '../../projects/classes/project';
 import { Processor } from '../../projects/classes/processor';
 import { Pipeline, PipelineResult } from '../../projects/classes/pipeline';
 
+const API_HOST = environment.apiHost;
 const API_URL = environment.apiUrl;
-const API_MEDIA_URL = environment.apiMediaUrl;
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -34,6 +35,7 @@ export class PaginatedResponse {
 @Injectable()
 export class APIService {
   public API_URL = API_URL;
+  public API_HOST = API_HOST;
 
   constructor(
     private http: HttpClient,
@@ -43,7 +45,7 @@ export class APIService {
     let result_url = '';
     if (result) {
       if (result.hasOwnProperty('url')) {
-        result_url = `${API_MEDIA_URL}${result.url}`;
+        result_url = `${API_HOST}${result.url}`;
       }
     }
     return result_url;
@@ -64,6 +66,8 @@ export class APIService {
       this.build_http_options()
     ).pipe(
       catchError(this.handleError)
+    ).pipe(
+      share()
     );
   }
 
@@ -73,6 +77,8 @@ export class APIService {
       this.build_http_options()
     ).pipe(
       catchError(this.handleError)
+    ).pipe(
+      share()
     );
   }
 
@@ -84,6 +90,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -104,7 +112,9 @@ export class APIService {
       catchError(
         this.handleError
       )
-    )
+    ).pipe(
+      share()
+    );
   }
 
   public postProject(title: string, description?: string): Observable<Project> {
@@ -119,6 +129,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -131,6 +143,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -142,6 +156,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -156,6 +172,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -167,6 +185,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 
@@ -181,6 +201,8 @@ export class APIService {
       catchError(
         this.handleError
       )
+    ).pipe(
+      share()
     );
   }
 

@@ -121,7 +121,13 @@
             </p>
             <div *ngIf="pipeline.result">
                 <pre><code highlight [code]="pipeline.result | json"></code></pre>
-                <img mat-card-image [src]="pipeline.result.get_image()">
+                <div *ngIf="pipeline.finishes_with_file">
+                    <p>
+                        <a [href]="pipeline.result.get_file_url()">Link to File</a>
+                    </p>
+
+                    <img mat-card-image [src]="pipeline.result.get_image()">
+                </div>
             </div>
 
         </mat-card-content>
