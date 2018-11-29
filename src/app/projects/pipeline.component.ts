@@ -29,6 +29,11 @@ export class PipelineComponent implements OnInit, OnDestroy {
     // TODO: Replace this
     public data_file: any;
 
+    layout = [
+        '*',
+        { type: 'submit', title: 'Valid' }
+    ];
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,

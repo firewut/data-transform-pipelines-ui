@@ -62,14 +62,15 @@
                             <div *ngIf="processor.template.schema.in_config">
                                 <h4>Input Config</h4>
                                 <json-schema-form loadExternalAssets="true" [schema]="processor.template.schema.in_config"
-                                    [(data)]="processor.in_config" framework="material-design" [UISchema]="processor.template.ui_schema">
+                                    [layout]="this.layout" [(ngModel)]="processor.in_config" framework="material-design"
+                                    [UISchema]="processor.template.ui_schema">
                                 </json-schema-form>
 
                             </div>
                             <div *ngIf="processor.template.schema.out_config">
                                 <h4>Output Config</h4>
                                 <json-schema-form loadExternalAssets="true" [schema]="processor.template.schema.out_config"
-                                    [(data)]="processor.out_config" framework="material-design">
+                                    [layout]="this.layout" [(ngModel)]="processor.out_config" framework="material-design">
                                 </json-schema-form>
                             </div>
                         </div>

@@ -12,9 +12,10 @@ import { Processor } from './classes/processor';
 export class ProcessorComponent implements OnInit {
   processor: Processor;
 
-  jsonFormOptions = {
-    'addSubmit': false
-  };
+  layout = [
+    '*',
+    { type: 'submit', title: 'Valid' }
+  ];
 
   constructor(
     private router: Router,
